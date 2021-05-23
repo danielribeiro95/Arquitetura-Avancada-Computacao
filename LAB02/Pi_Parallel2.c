@@ -3,7 +3,7 @@
 #include <math.h>
 #include <pthread.h>
 #include <time.h>
-#define N 100000000
+#define N 1000000
 #define num_thread 8
 
 const float N1 = N;
@@ -13,16 +13,13 @@ pthread_t thread[num_thread];
 pthread_mutex_t gLock;
 
 
-
 void *compute(void *arg){
 	int num = *((int*)arg);
-    double partial_sum = 0.0,x;
-    double h = 2.0 / N;
+    double partial_sum = 0;
 
-   for (int i = num; i < N; i += num_thread){
-       x = -1 + (i + 0.5f) * h;
-        partial_sum += sqrt(1.0 - x*x) * h;
-        }
+    for (int i = num;i<N;i+=num_thread){
+    partial_sum = (4/(1+pow((i)*dx,2)))*dx;
+    }
     pthread_mutex_lock(&gLock);
     pi += partial_sum;
     pthread_mutex_unlock(&gLock);
@@ -46,9 +43,7 @@ for (int i = 0; i< num_thread; i++){
     pthread_join(thread[i],NULL);
 }
 
-
-
-    printf("%lf \n", 2*pi);
+    printf("\npi = %lf \n", pi);
     t = clock()-t;
     double tempo = ((double)t)/CLOCKS_PER_SEC;
 	printf("Tempo de execucao: %f\n",tempo);

@@ -8,11 +8,9 @@ int main(){
 clock_t t;
 t = clock();
 
-float N = 100000000;
+float N = 1000000;
 double dx = 1/N;
 double sum = 0;
-
-
 
 for (int i = 0; i <N ;i++){
     sum = sum + (4/(1+pow(i*dx,2)))*dx;
