@@ -8,7 +8,7 @@ int main(){
 clock_t t;
 t = clock();
 
-float N = 1000000;
+float N = 1000000000;
 double dx = 1/N;
 double sum = 0;
 

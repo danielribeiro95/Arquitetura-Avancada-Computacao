@@ -3,7 +3,7 @@
 #include <math.h>
 #include <pthread.h>
 #include <time.h>
-#define N 1000000
+#define N 1000000000
 #define num_thread 8
 
 const float N1 = N;
@@ -18,7 +18,7 @@ void *compute(void *arg){
     double partial_sum = 0;
 
     for (int i = num;i<N;i+=num_thread){
-    partial_sum = (4/(1+pow((i)*dx,2)))*dx;
+    partial_sum += (4/(1+pow((i)*dx,2)))*dx;
     }
     pthread_mutex_lock(&gLock);
     pi += partial_sum;
