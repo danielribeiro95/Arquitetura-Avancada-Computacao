@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <pthread.h>
-#include <time.h>
+
 #define N 1000000000
 #define num_thread 8
 
@@ -30,7 +30,6 @@ void *compute(void *arg){
 
 int main(){
 
-clock_t t = clock();
 int i,tNum[num_thread];
 pthread_mutex_init(&gLock, NULL);
 
@@ -44,12 +43,6 @@ for (int i = 0; i< num_thread; i++){
 }
 
     printf("\npi = %lf \n", pi);
-    t = clock()-t;
-    double tempo = ((double)t)/CLOCKS_PER_SEC;
-	printf("Tempo de execucao: %f\n",tempo);
     pthread_mutex_destroy(&gLock);
     return 0;
 }
-
-
-
